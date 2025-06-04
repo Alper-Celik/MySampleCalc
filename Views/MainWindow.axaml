@@ -6,6 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MySampleCalc.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+       Design.Height="1000" 
         Icon="/Assets/avalonia-logo.ico"
         Title="MySampleCalc">
 
@@ -15,6 +16,55 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Window.Styles>
+        <Style Selector="Button.calcbtn">
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="*,700">
+        <StackPanel Grid.Row="0">
+            <TextBlock HorizontalAlignment="Center" Margin="20" FontSize="30" Text="{Binding Greeting}"/>
+            <TextBox Margin="40 5" FontSize="40"/>
+            <StackPanel Margin="60 10" Orientation="Horizontal">
+                <TextBlock FontSize="30" Text="=  "/>
+                <!-- <TextBlock Name="TextBoxResult" FontSize="30" Text="{Binding Result}"/> -->
+            </StackPanel>
+        </StackPanel>
+        <Grid   Grid.Row="1"
+                ColumnDefinitions="*,*,*,*"
+                RowDefinitions="*,*,*,*,*">
+
+            <Button Grid.Column="3" Grid.Row="0"  Classes="calcbtn" Name="BTN_Plus">+</Button>
+            <Button Grid.Column="2" Grid.Row="0"  Classes="calcbtn" Name="BTN_Substract">-</Button>
+            <Button Grid.Column="1" Grid.Row="0"  Classes="calcbtn" Name="BTN_Divide">/</Button>
+            <Button Grid.Column="0" Grid.Row="0"  Classes="calcbtn" Name="BTN_Multiply">X</Button>
+            
+            <Button Grid.Column="3" Grid.Row="1"  Classes="calcbtn" Name="BTN_Par_Open">(</Button>
+            <Button Grid.Column="3" Grid.Row="2"  Classes="calcbtn" Name="BTN_Par_Close">)</Button>
+
+            <Button Grid.Column="2" Grid.Row="1" Classes="calcbtn" Name="BTN9">9</Button>
+            <Button Grid.Column="1" Grid.Row="1" Classes="calcbtn" Name="BTN8">8</Button>
+            <Button Grid.Column="0" Grid.Row="1" Classes="calcbtn" Name="BTN7">7</Button>
+
+            <Button Grid.Column="2" Grid.Row="2" Classes="calcbtn" Name="BTN6">6</Button>
+            <Button Grid.Column="1" Grid.Row="2" Classes="calcbtn" Name="BTN5">5</Button>
+            <Button Grid.Column="0" Grid.Row="2" Classes="calcbtn" Name="BTN4">4</Button>
+
+            <Button Grid.Column="2" Grid.Row="3" Classes="calcbtn" Name="BTN3">3</Button>
+            <Button Grid.Column="1" Grid.Row="3" Classes="calcbtn" Name="BTN2">2</Button>
+            <Button Grid.Column="0" Grid.Row="3" Classes="calcbtn" Name="BTN1">1</Button>
+
+            <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Classes="calcbtn" Name="BTN0">0</Button>
+            <Button Grid.Column="2" Grid.Row="4" Classes="calcbtn" Name="BTN_Dot">.</Button>
+            
+            <Button Grid.Column="3" Grid.Row="3" Grid.RowSpan="2"  Classes="calcbtn" Name="BTN_EQ">=</Button>
+
+        </Grid>         
+    </Grid>
 
 </Window>
