@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="MySampleCalc.App"
              xmlns:local="using:MySampleCalc"
+             xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -10,6 +11,8 @@
     </Application.DataTemplates>
   
     <Application.Styles>
-        <FluentTheme />
+        <!-- <FluentTheme /> -->
+        <!-- <SimpleTheme /> -->
+        <themes:MaterialTheme PrimaryColor="Purple" SecondaryColor="Lime" />
     </Application.Styles>
 </Application>
