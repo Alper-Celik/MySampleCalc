@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using Avalonia.Controls.Platform;
+using DynamicData;
 
 namespace MySampleCalc.Models;
 
@@ -61,15 +62,19 @@ public static class Calculator
 
   public static List<string> DecomposeOperation(string operation)
   {
+    operation = operation.Replace(" ", "");
     List<string> operationParts = new();
     int lastPartStart = 0;
     bool delimitorCame = false;
     for (int i = 1; i < operation.Length; i++)
     {
-      if (operation[i] == ' ')
+
+      if (operation[i - 1] == '(' && operation[i] == ')')
       {
+        lastPartStart = i + 1;
         continue;
       }
+
       if (GetOperationType(operation[i - 1]) == OperationType.Digit && operation[i] == '.')
       {
         if (delimitorCame)
@@ -88,8 +93,13 @@ public static class Calculator
         delimitorCame = false;
       }
     }
-    operationParts.RemoveAll((x) => x == "()");
-    return operationParts;
+
+    if (lastPartStart < operation.Length)
+    {
+      operationParts.Add(operation.Substring(lastPartStart, operation.Length - lastPartStart));
+    }
+
+    return operationParts.Select(x => x.Replace(" ", "")).ToList();
   }
 
   private static int LeftCloseParens(string op)
