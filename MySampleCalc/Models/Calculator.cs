@@ -59,7 +59,7 @@ public static class Calculator
   }
   public static string Calculate(string operation) => "not implemented";
 
-  private static List<string> DecomposeOperation(string operation)
+  public static List<string> DecomposeOperation(string operation)
   {
     List<string> operationParts = new();
     int lastPartStart = 0;
