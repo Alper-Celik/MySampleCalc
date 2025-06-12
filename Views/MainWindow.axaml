@@ -22,6 +22,10 @@
     </Design.DataContext>
 
     <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="CornerRadius" Value="30"/>
+        </Style>
+        
         <Style Selector="Button.calcbtn">
             <Setter Property="VerticalAlignment" Value="Stretch"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -30,13 +34,17 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
 
             <Setter Property="Margin" Value="15"/>
-            <Setter Property="CornerRadius" Value="30"/>
         </Style>
     </Window.Styles>
 
     <Grid RowDefinitions="*,700">
         <StackPanel Grid.Row="0">
-            <TextBox Margin="40 5" FontSize="40"  Text="{Binding Operation}"/>
+            <Grid Margin="30, 15" ColumnDefinitions="9*,*,*">
+                <TextBox FontSize="40"  Text="{Binding Operation}"/>
+                <Button Margin="5" Grid.Column="1" Command="{Binding Delete}">&lt;-</Button>
+                <Button Margin="5" Grid.Column="2" Command="{Binding DeleteAll}">CA</Button>
+            </Grid>
+
             <StackPanel Margin="60 10" Orientation="Horizontal">
                 <TextBlock FontSize="30" Text="=  "/>
                 <TextBlock Name="TextBoxResult" FontSize="30" Text="{Binding Result}"/>
@@ -46,13 +54,13 @@
                 ColumnDefinitions="*,*,*,*"
                 RowDefinitions="*,*,*,*,*">
 
-            <Button Grid.Column="3" Grid.Row="0"  Classes="calcbtn" Name="BTN_Plus">+</Button>
-            <Button Grid.Column="2" Grid.Row="0"  Classes="calcbtn" Name="BTN_Substract">-</Button>
-            <Button Grid.Column="1" Grid.Row="0"  Classes="calcbtn" Name="BTN_Divide">/</Button>
-            <Button Grid.Column="0" Grid.Row="0"  Classes="calcbtn" Name="BTN_Multiply">X</Button>
+            <Button Grid.Column="3" Grid.Row="0"  Classes="calcbtn" Command="{Binding EnterSymbol[+]}" Name="BTN_Plus">+</Button>
+            <Button Grid.Column="2" Grid.Row="0"  Classes="calcbtn" Command="{Binding EnterSymbol[-]}" Name="BTN_Substract">-</Button>
+            <Button Grid.Column="1" Grid.Row="0"  Classes="calcbtn" Command="{Binding EnterSymbol[/]}" Name="BTN_Divide">/</Button>
+            <Button Grid.Column="0" Grid.Row="0"  Classes="calcbtn" Command="{Binding EnterSymbol[*]}" Name="BTN_Multiply">*</Button>
             
-            <Button Grid.Column="3" Grid.Row="1"  Classes="calcbtn" Name="BTN_Par_Open">(</Button>
-            <Button Grid.Column="3" Grid.Row="2"  Classes="calcbtn" Name="BTN_Par_Close">)</Button>
+            <Button Grid.Column="3" Grid.Row="1"  Classes="calcbtn" Command="{Binding EnterSymbol[(]}" Name="BTN_Par_Open">(</Button>
+            <Button Grid.Column="3" Grid.Row="2"  Classes="calcbtn" Command="{Binding EnterSymbol[)]}" Name="BTN_Par_Close">)</Button>
 
             <Button Grid.Column="2" Grid.Row="1" Classes="calcbtn" Command="{Binding EnterNumber[9]}" Name="BTN9">9</Button>
             <Button Grid.Column="1" Grid.Row="1" Classes="calcbtn" Command="{Binding EnterNumber[8]}" Name="BTN8">8</Button>
@@ -67,7 +75,7 @@
             <Button Grid.Column="0" Grid.Row="3" Classes="calcbtn" Command="{Binding EnterNumber[1]}" Name="BTN1">1</Button>
 
             <Button Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Classes="calcbtn" Command="{Binding EnterNumber[0]}" Name="BTN0">0</Button>
-            <Button Grid.Column="2" Grid.Row="4" Classes="calcbtn" Name="BTN_Dot">.</Button>
+            <Button Grid.Column="2" Grid.Row="4" Classes="calcbtn" Command="{Binding EnterDecimal}" Name="BTN_Dot">.</Button>
             
             <Button Grid.Column="3" Grid.Row="3" Grid.RowSpan="2" Classes="calcbtn" Command="{Binding Calculate}" Name="BTN_EQ">=</Button>
 
